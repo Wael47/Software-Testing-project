@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Currency Convert</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .input-container {
+            margin-bottom: 10px;
+        }
+
+        .input-container input,
+        .input-container select {
+            width: 200px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .btn-convert {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-convert:hover {
+            background-color: #45a049;
+        }
+
+        .result-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .result-box {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .rate-box {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .currency-photo {
+            width: 100px;
+            height: auto;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<h1>Currency Convert</h1>
+<div class="container">
+    <form action="/" method="post">
+        <div class="input-container">
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" th:value="${amount}" required>
+        </div>
+        <div class="input-container">
+            <label for="from">From:</label>
+            <select id="from" name="from" required>
+                <option value=""></option>
+                <option th:each="currency : ${currencyList}" th:value="${currency.getCurrencyCode()}"
+                        th:text="${currency.getCurrencyName() +' - '+ currency.getCurrencyCode()}"
+                        th:selected="${currency.getCurrencyCode().equals(currencyFrom)}"></option>
+            </select>
+        </div>
+        <div class="input-container">
+            <label for="to">To:</label>
+            <select id="to" name="to" required>
+                <option value=""></option>
+                <option th:each="currency : ${currencyList}" th:value="${currency.getCurrencyCode()}"
+                        th:text="${currency.getCurrencyName() +' - '+ currency.getCurrencyCode()}"
+                        th:selected="${currency.getCurrencyCode().equals(currencyTo)}"></option>
+            </select>
+        </div>
+        <button class="btn-convert">Convert</button>
+    </form>
+    <div class="result-container">
+        <div class="result-box">
+            <p id="convertedAmount" th:text="${convertedAmount}"></p>
+        </div>
+        <div class="rate-box">
+            <p id="rate" th:text="${rate}"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*  function convertCurrency() {
+        var amount = parseFloat(document.getElementById('amount').value);
+        var fromCurrency = document.getElementById('from').value;
+        var toCurrency = document.getElementById('to').value;
+
+        // Make an API call to get the exchange rate
+        var url = 'https://api.exchangerate-api.com/v4/latest/' + fromCurrency;
+        fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                  var rate = data.rates[toCurrency];
+                  var convertedAmount = amount * rate;
+
+                  document.getElementById('rate').textContent = 'Exchange Rate: 1 ' + fromCurrency + ' = ' + rate.toFixed(2) + ' ' + toCurrency;
+                  document.getElementById('convertedAmount').textContent = 'Converted Amount: ' + convertedAmount.toFixed(2) + ' ' + toCurrency;
+                })
+                .catch(error => {
+                  console.log(error);
+                  alert('Failed to convert currency. Please try again.');
+                });
+      }*/
+</script>
+</body>
+</html>
