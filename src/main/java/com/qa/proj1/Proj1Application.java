@@ -10,23 +10,15 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class Proj1Application {
-
     public static void main(String[] args) {
-
-        String apiUrl = "https://v6.exchangerate-api.com/v6/c4ed537ad53a1eb109309869/codes";
+        String apiUrl = "https://v6.exchangerate-api.com/v6/2ee3142def0f1792c6871a81 /codes";
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(apiUrl, String.class);
-
         Gson gson = new Gson();
-
         ApiCurrencyListResponse response = gson.fromJson(result, ApiCurrencyListResponse.class);
-        for (String[] currency: response.getSupported_codes()
-        ) {
+        for (String[] currency : response.getSupported_codes()) {
             MainController.currencyList.add(new Currency(currency[0], currency[1]));
         }
-
-
         SpringApplication.run(Proj1Application.class, args);
     }
-
 }

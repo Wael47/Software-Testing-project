@@ -13,16 +13,13 @@ public class CurrencyConvertService implements ICurrencyConvertService {
 
     private IConversionRateRepository conversionRateRepository;
 
-    public CurrencyConvertService(IConversionRateRepository conversionRateRepository) {
-        this.conversionRateRepository = conversionRateRepository;
-    }
     public double convertCurrency(int amount, double conversionRate) {
         return amount * conversionRate;
     }
     @Override
     public double getConversionRateFromAPI(String from, String to) {
         try {
-            String apiUrl = "https://v6.exchangerate-api.com/v6/c4ed537ad53a1eb109309869/pair/" + from.toUpperCase() + "/" + to.toUpperCase();
+            String apiUrl = "https://v6.exchangerate-api.com/v6/2ee3142def0f1792c6871a81/pair/" + from.toUpperCase() + "/" + to.toUpperCase();
             RestTemplate restTemplate = new RestTemplate();
             String result = restTemplate.getForObject(apiUrl, String.class);
             Gson gson = new Gson();
@@ -76,4 +73,7 @@ public class CurrencyConvertService implements ICurrencyConvertService {
         return new double[]{convertedAmount, conversionRate};
     }
 
+    public void setConversionRateRepository(IConversionRateRepository conversionRateRepository) {
+        this.conversionRateRepository = conversionRateRepository;
+    }
 }

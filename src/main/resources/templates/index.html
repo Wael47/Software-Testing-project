@@ -6,6 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Currency Convert</title>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -90,7 +92,7 @@
         <div class="input-container">
             <label for="from">From:</label>
             <select id="from" name="from" required>
-                <option value=""></option>
+                <option value="">From....</option>
                 <option th:each="currency : ${currencyList}" th:value="${currency.getCurrencyCode()}"
                         th:text="${currency.getCurrencyName() +' - '+ currency.getCurrencyCode()}"
                         th:selected="${currency.getCurrencyCode().equals(currencyFrom)}"></option>
@@ -99,18 +101,24 @@
         <div class="input-container">
             <label for="to">To:</label>
             <select id="to" name="to" required>
-                <option value=""></option>
+                <option value="">TO....</option>
                 <option th:each="currency : ${currencyList}" th:value="${currency.getCurrencyCode()}"
                         th:text="${currency.getCurrencyName() +' - '+ currency.getCurrencyCode()}"
                         th:selected="${currency.getCurrencyCode().equals(currencyTo)}"></option>
             </select>
         </div>
+        <div class="alert alert-danger" role="alert" th:if="${errorMessage}">
+            <p id="errorMessage" th:text="${errorMessage}"></p>
+        </div>
+
         <button class="btn-convert">Convert</button>
     </form>
     <div class="result-container">
+        Converted Amount:
         <div class="result-box">
             <p id="convertedAmount" th:text="${convertedAmount}"></p>
         </div>
+        Exchange Rate:
         <div class="rate-box">
             <p id="rate" th:text="${rate}"></p>
         </div>
