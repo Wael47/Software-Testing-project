@@ -1,2 +1,2 @@
-# Software-Testing-Assignment-1
-QA Assignment 1
+# Software-Testing-Project
+QA Project
