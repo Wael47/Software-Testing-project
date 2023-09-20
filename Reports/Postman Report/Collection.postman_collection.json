@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "0fb901ae-e8ff-41f7-a2ba-5e78ed7a630f",
+		"name": "Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27468686"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var json = pm.response.json();\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is a json object\", function () {\r",
+							"    pm.expect(json).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response to have 'Rate' object\", function () {\r",
+							"    pm.expect(json).to.have.property('rates');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if rate is not null\", function () {\r",
+							"    pm.expect(json.rates).to.not.be.null;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://open.er-api.com/v6/latest/USD",
+					"protocol": "https",
+					"host": [
+						"open",
+						"er-api",
+						"com"
+					],
+					"path": [
+						"v6",
+						"latest",
+						"USD"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
